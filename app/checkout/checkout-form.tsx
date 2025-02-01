@@ -51,8 +51,8 @@ const shippingAddressDefaultValues =
         postalCode: '52072',
         city: 'Aachen',
         province: 'NRW',
-        mobil: '00491792363949',
         country: 'Germany',
+        phone: '00491792363949',
       }
     : {
         fullName: '',
@@ -60,8 +60,8 @@ const shippingAddressDefaultValues =
         postalCode: '',
         city: '',
         province: '',
-        mobil: '',
         country: '',
+        phone: '',
       };
 
 const CheckoutForm = () => {
@@ -99,10 +99,10 @@ const CheckoutForm = () => {
     if (!isMounted || !shippingAddress) return;
     shippingAddressForm.setValue('fullName', shippingAddress.fullName);
     shippingAddressForm.setValue('street', shippingAddress.street);
-    shippingAddressForm.setValue('city', shippingAddress.city);
-    shippingAddressForm.setValue('country', shippingAddress.country);
     shippingAddressForm.setValue('postalCode', shippingAddress.postalCode);
+    shippingAddressForm.setValue('city', shippingAddress.city);
     shippingAddressForm.setValue('province', shippingAddress.province);
+    shippingAddressForm.setValue('country', shippingAddress.country);
     shippingAddressForm.setValue('phone', shippingAddress.phone);
   }, [items, isMounted, router, shippingAddress, shippingAddressForm]);
 
@@ -226,8 +226,9 @@ const CheckoutForm = () => {
                 <div className='col-span-5 '>
                   <p>
                     {shippingAddress.fullName} <br />
-                    {shippingAddress.street} <br />
-                    {`${shippingAddress.city}, ${shippingAddress.province}, ${shippingAddress.postalCode}, ${shippingAddress.country}`}
+                    {shippingAddress.street} <br />{shippingAddress.postalCode}
+                    ,{' '}
+                    {`${shippingAddress.city}, ${shippingAddress.province}, ${shippingAddress.country}`}
                   </p>
                 </div>
                 <div className='col-span-2'>
@@ -302,53 +303,6 @@ const CheckoutForm = () => {
                         <div className='flex flex-col gap-5 md:flex-row'>
                           <FormField
                             control={shippingAddressForm.control}
-                            name='city'
-                            render={({ field }) => (
-                              <FormItem className='w-full'>
-                                <FormLabel>City</FormLabel>
-                                <FormControl>
-                                  <Input placeholder='Enter city' {...field} />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                          <FormField
-                            control={shippingAddressForm.control}
-                            name='province'
-                            render={({ field }) => (
-                              <FormItem className='w-full'>
-                                <FormLabel>Province</FormLabel>
-                                <FormControl>
-                                  <Input
-                                    placeholder='Enter province'
-                                    {...field}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                          <FormField
-                            control={shippingAddressForm.control}
-                            name='country'
-                            render={({ field }) => (
-                              <FormItem className='w-full'>
-                                <FormLabel>Country</FormLabel>
-                                <FormControl>
-                                  <Input
-                                    placeholder='Enter country'
-                                    {...field}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-                        <div className='flex flex-col gap-5 md:flex-row'>
-                          <FormField
-                            control={shippingAddressForm.control}
                             name='postalCode'
                             render={({ field }) => (
                               <FormItem className='w-full'>
@@ -363,6 +317,56 @@ const CheckoutForm = () => {
                               </FormItem>
                             )}
                           />
+                          <div className='flex flex-col gap-5 md:flex-row'>
+                            <FormField
+                              control={shippingAddressForm.control}
+                              name='city'
+                              render={({ field }) => (
+                                <FormItem className='w-full'>
+                                  <FormLabel>City</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder='Enter city'
+                                      {...field}
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                              control={shippingAddressForm.control}
+                              name='province'
+                              render={({ field }) => (
+                                <FormItem className='w-full'>
+                                  <FormLabel>Province</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder='Enter province'
+                                      {...field}
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                              control={shippingAddressForm.control}
+                              name='country'
+                              render={({ field }) => (
+                                <FormItem className='w-full'>
+                                  <FormLabel>Country</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder='Enter country'
+                                      {...field}
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
                           <FormField
                             control={shippingAddressForm.control}
                             name='phone'
