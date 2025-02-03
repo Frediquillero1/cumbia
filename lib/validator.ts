@@ -75,7 +75,7 @@ export const ShippingAddressSchema = z.object({
   province: z.string().min(1, 'Province is required'),
   phone: z.string().min(1, 'Phone number is required'),
   country: z.string().min(1, 'Country is required'),
-});
+})
 
 // Order
 export const OrderInputSchema = z.object({
@@ -113,8 +113,7 @@ export const OrderInputSchema = z.object({
   deliveredAt: z.date().optional(),
   isPaid: z.boolean().default(false),
   paidAt: z.date().optional(),
-});
-
+})
 // Cart
 
 export const CartSchema = z.object({

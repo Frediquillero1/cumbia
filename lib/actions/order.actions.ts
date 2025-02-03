@@ -30,7 +30,32 @@ export const createOrder = async (clientSideCart: Cart) => {
     return { success: false, message: formatError(error) };
   }
 }
+export const createOrderFromCart = async (
+  clientSideCart: Cart,
+  userId: string
+) => {
+  const cart = {
+    ...clientSideCart,
+    ...calcDeliveryDateAndPrice({
+      items: clientSideCart.items,
+      shippingAddress: clientSideCart.shippingAddress,
+      deliveryDateIndex: clientSideCart.deliveryDateIndex,
+    }),
+  }
 
+  const order = OrderInputSchema.parse({
+    user: userId,
+    items: cart.items,
+    shippingAddress: cart.shippingAddress,
+    paymentMethod: cart.paymentMethod,
+    itemsPrice: cart.itemsPrice,
+    shippingPrice: cart.shippingPrice,
+    taxPrice: cart.taxPrice,
+    totalPrice: cart.totalPrice,
+    expectedDeliveryDate: cart.expectedDeliveryDate,
+  })
+  return await Order.create(order);
+}
 export async function approvePayPalOrder(
   orderId: string,
   data: { orderID: string }
@@ -67,33 +92,6 @@ export async function approvePayPalOrder(
     return { success: false, message: formatError(err) };
   }
 }
-export const createOrderFromCart = async (
-  clientSideCart: Cart,
-  userId: string
-) => {
-  const cart = {
-    ...clientSideCart,
-    ...calcDeliveryDateAndPrice({
-      items: clientSideCart.items,
-      shippingAddress: clientSideCart.shippingAddress,
-      deliveryDateIndex: clientSideCart.deliveryDateIndex,
-    }),
-  };
-
-  const order = OrderInputSchema.parse({
-    user: userId,
-    items: cart.items,
-    shippingAddress: cart.shippingAddress,
-    paymentMethod: cart.paymentMethod,
-    itemsPrice: cart.itemsPrice,
-    shippingPrice: cart.shippingPrice,
-    taxPrice: cart.taxPrice,
-    totalPrice: cart.totalPrice,
-    expectedDeliveryDate: cart.expectedDeliveryDate,
-  });
-  return await Order.create(order);
-};
-
 export async function getOrderById(orderId: string): Promise<IOrder> {
   await connectToDatabase();
   const order = await Order.findById(orderId);
