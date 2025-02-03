@@ -29,7 +29,44 @@ export const createOrder = async (clientSideCart: Cart) => {
   } catch (error) {
     return { success: false, message: formatError(error) };
   }
-};
+}
+
+export async function approvePayPalOrder(
+  orderId: string,
+  data: { orderID: string }
+) {
+  await connectToDatabase();
+  try {
+    const order = await Order.findById(orderId).populate('user', 'email');
+    if (!order) throw new Error('Order not found');
+
+    const captureData = await paypal.capturePayment(data.orderID);
+    if (
+      !captureData ||
+      captureData.id !== order.paymentResult?.id ||
+      captureData.status !== 'COMPLETED'
+    )
+      throw new Error('Error in paypal payment');
+    order.isPaid = true;
+    order.paidAt = new Date();
+    order.paymentResult = {
+      id: captureData.id,
+      status: captureData.status,
+      email_address: captureData.payer.email_address,
+      pricePaid:
+        captureData.purchase_units[0]?.payments?.captures[0]?.amount?.value,
+    };
+    await order.save();
+    await sendPurchaseReceipt({ order });
+    revalidatePath(`/account/orders/${orderId}`);
+    return {
+      success: true,
+      message: 'Your order has been successfully paid by PayPal',
+    };
+  } catch (err) {
+    return { success: false, message: formatError(err) };
+  }
+}
 export const createOrderFromCart = async (
   clientSideCart: Cart,
   userId: string
@@ -88,44 +125,6 @@ export async function createPayPalOrder(orderId: string) {
     return { success: false, message: formatError(err) };
   }
 }
-
-export async function approvePayPalOrder(
-  orderId: string,
-  data: { orderID: string }
-) {
-  await connectToDatabase();
-  try {
-    const order = await Order.findById(orderId).populate('user', 'email');
-    if (!order) throw new Error('Order not found');
-
-    const captureData = await paypal.capturePayment(data.orderID);
-    if (
-      !captureData ||
-      captureData.id !== order.paymentResult?.id ||
-      captureData.status !== 'COMPLETED'
-    )
-      throw new Error('Error in paypal payment');
-    order.isPaid = true;
-    order.paidAt = new Date();
-    order.paymentResult = {
-      id: captureData.id,
-      status: captureData.status,
-      email_address: captureData.payer.email_address,
-      pricePaid:
-        captureData.purchase_units[0]?.payments?.captures[0]?.amount?.value,
-    };
-    await order.save();
-    await sendPurchaseReceipt({ order });
-    revalidatePath(`/account/orders/${orderId}`);
-    return {
-      success: true,
-      message: 'Your order has been successfully paid by PayPal',
-    };
-  } catch (err) {
-    return { success: false, message: formatError(err) };
-  }
-}
-
 export const calcDeliveryDateAndPrice = async ({
   items,
   shippingAddress,

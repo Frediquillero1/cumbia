@@ -154,8 +154,7 @@ export default function OrderPaymentForm({
                 <p>
                   {shippingAddress.fullName} <br />
                   {shippingAddress.street} <br />
-                  {shippingAddress.postalCode},
-                  {`${shippingAddress.city}, ${shippingAddress.province}, $ ${shippingAddress.country}`}
+                  {`${shippingAddress.postalCode}, {${shippingAddress.city}, ${shippingAddress.province}, ${shippingAddress.country}`}
                 </p>
               </div>
             </div>

@@ -37,11 +37,11 @@ PurchaseReceiptEmail.PreviewProps = {
     shippingAddress: {
       fullName: 'John Doe',
       street: '123 Main St',
-      city: 'New York',
       postalCode: '12345',
+      city: 'New York',
+      province: 'New York',
       country: 'USA',
       phone: '123-456-7890',
-      province: 'New York',
     },
     items: [
       {

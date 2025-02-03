@@ -54,7 +54,7 @@
     "eslint-config-next": "15.1.6",
     "i": "^0.3.7",
     "npm": "^10.9.2",
-    "npx": "^3.0.0",
+    "npx": "^10.2.2",
     "postcss": "^8",
     "react-email": "^3.0.6",
     "resend": "^4.1.1",
