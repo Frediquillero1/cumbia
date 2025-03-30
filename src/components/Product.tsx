@@ -30,7 +30,7 @@ const Product = ({ product, bg }: Props) => {
               className='w-72 h-72 object-contain'
             />
           </Link>
-          <div className='abosute bottom-0 flex items-center gap-5 justify-center translate-y-[110%] group-hover:-translate-y-2 transition-transform duration-300'>
+          <div className='absolute bottom-0 flex items-center gap-5 justify-center translate-y-[150%] group-hover:-translate-y-2 transition-transform duration-300'>
             <button
               onClick={() => {
                 dispatch(addToCart(product));
@@ -38,7 +38,7 @@ const Product = ({ product, bg }: Props) => {
                   `${product?.title.substring(0, 12)}... added to cart`
                 );
               }}
-              className='bg-gray-800 text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-1 hover:bg-gray-950 hover:text-white duration-200'
+              className='bg-gray-800 text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-1 hover:bg-gray-950 hover:text-amber-200 duration-200'
             >
               <span>
                 <AiOutlineShopping />
@@ -47,7 +47,7 @@ const Product = ({ product, bg }: Props) => {
             </button>
             <Link
               href={`/product/${product?.slug?.current}`}
-              className='bg-gray-800 text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-1 hover:bg-gray-950 hover:text-white duration-200'
+              className='bg-gray-800 text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-1 hover:bg-gray-950 hover:text-amber-200 duration-200'
             >
               <span>
                 <BsArrowsFullscreen />
@@ -57,7 +57,7 @@ const Product = ({ product, bg }: Props) => {
           </div>
           {product?.isnew && (
             <div className='absolute top-2 right-2 z-50'>
-              <p className='bg-primeColor px-4 py-1 text-white flex justify-center items-center text-sm font-semibold hover:bg-black duration-300 cursor-pointer rounded-md'>
+              <p className='bg-primeColor px-4 py-1 text-amber-200 flex justify-center items-center text-sm font-semibold hover:bg-black duration-300 cursor-pointer rounded-md'>
                 New
               </p>
             </div>
