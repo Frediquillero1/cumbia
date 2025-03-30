@@ -78,7 +78,7 @@ const Product = ({ product, bg }: Props) => {
         </div>
         <div className='flex items-center justify-between'>
           <p className='text-[#767676] text-sm'>
-            {/* a product by{' '} */}
+            {' '}
             <span className='font-semibold text-primeColor'>
               {product?.brand}
             </span>

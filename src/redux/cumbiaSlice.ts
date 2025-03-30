@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { ProductProps } from "../../type";
+import { createSlice } from '@reduxjs/toolkit';
+import { ProductProps } from '../../type';
 
 interface StoreState {
   productData: ProductProps[];
@@ -10,7 +10,7 @@ const initialState: StoreState = {
 };
 
 export const cumbiaSlice = createSlice({
-  name: "cumbia",
+  name: 'cumbia',
   initialState,
   reducers: {
     addToCart: (state, action) => {
