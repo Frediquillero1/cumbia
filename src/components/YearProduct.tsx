@@ -11,13 +11,13 @@ const YearProduct = () => {
         <Image
           src={productOfTheYear}
           alt='product'
-          className='w-full h-full object-cover hidden md:inline-block'
+          className='w-full h-full object-contain md:inline-block'
         />
-        <div className='w-full md:w-2/3 xl:w-1/2 h-80 absolute px-4 md:px-0 top-0 right-0 flex flex-col items-start gap-6 justify-center'>
-          <h1 className='text-3xl font-semibold text-primeColor'>
-            Prouct of the year
+        <div className='w-full md:w-2/3 xl:w-1/2 h-80 absolute px-4 md:px-0 top-4 right-0 flex flex-col items-start gap-6 justify-center'>
+          <h1 className='text-3xl font-semibold text-white'>
+            Product of the year
           </h1>
-          <p className='text-base font-normal text-primeColor max-w-[600px] mr-4'>
+          <p className='text-base font-normal text-white max-w-[600px] mr-5'>
             Deadlights jack lad schooner scallywag dance the hempen jig carouser
             broadside cable strike colors. Bring a spring upon her cable
             holystone blow the man down spanker Shiver me timbers to go on
@@ -25,7 +25,7 @@ const YearProduct = () => {
           </p>
           <Link
             href={'/shop'}
-            className='bg-cumbiaOrange text-white text-lg w-[185px] h-[50px] hover:bg-cumbiaOrangeDark duration-300 font-bold flex items-center justify-center rounded-md'
+            className='bg-cumbiaOrange text-white text-lg w-[185px] h-[50px] hover:bg-cumbiaOrangeDark duration-300 hoverEffect font-bold flex items-center justify-center rounded-md'
           >
             Shop Now
           </Link>

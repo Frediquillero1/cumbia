@@ -17,6 +17,7 @@ interface Props {
 
 const Product = ({ product, bg }: Props) => {
   const dispatch = useDispatch();
+  
   return (
     <div className='w-full relative group border-[1px] border-black hover:shadow-lg duration-200 shadow-gray-500 rounded-md overflow-hidden group'>
       <div className='w-full h-80 flex items-center justify-center bg-white overflow-hidden'>
@@ -47,7 +48,7 @@ const Product = ({ product, bg }: Props) => {
             </button>
             <Link
               href={`/product/${product?.slug?.current}`}
-              className='bg-gray-800 text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-1 hover:bg-gray-950 hover:text-amber-200 duration-200'
+              className='bg-gray-800 text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-1 hover:bg-gray-950 hover:text-amber-300 duration-200'
             >
               <span>
                 <BsArrowsFullscreen />
